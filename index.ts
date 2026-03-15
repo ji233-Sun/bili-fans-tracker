@@ -10,7 +10,9 @@ const app = new Elysia()
     const res = await fetch(
       `https://api.bilibili.com/x/relation/stat?vmid=${TARGET_UID}`
     );
-    const json = await res.json();
+    const json = (await res.json()) as {
+      data?: { follower?: number };
+    };
     const follower = json?.data?.follower ?? 0;
     return {
       follower,
