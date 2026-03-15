@@ -142,8 +142,15 @@ const app = new Elysia()
 </body>
 </html>`
   )
-  .listen(3000);
 
-console.log(
-  `🚀 粉丝追踪器运行中: http://localhost:${app.server?.port}`
-);
+
+// Vercel serverless: 导出 fetch handler
+export default app;
+
+// 本地开发: 启动 listen
+if (typeof Bun !== "undefined") {
+  app.listen(3000);
+  console.log(
+    `🚀 粉丝追踪器运行中: http://localhost:${app.server?.port}`
+  );
+}
